@@ -1,6 +1,6 @@
 ## 3Scale API Proxy using Heroku
 
-This is a sample app showing how to run a [3Scale](3Scale.com) API Proxy on Nginx using the
+This is a sample app showing how to run a [3Scale](http://3Scale.com) API Proxy on Nginx using the
 [OpenResty buildpack](https://github.com/leafo/heroku-openresty).
 
 [Learn about 3scale's API proxy on Nginx](https://support.3scale.net/howtos/api-configuration/nginx-proxy)
@@ -9,7 +9,7 @@ Usage
 ---------
 
 First:
-Get a free [3Scale](3Scale.com) account and a free [Heroku.com](Heroku.com) account if you don't already have them.
+Get a free [3Scale](http://3Scale.com) account and a free [Heroku.com](http://Heroku.com) account if you don't already have them.
 
 Follow [3Scale's instructions](https://support.3scale.net/howtos/api-configuration/nginx-proxy) on setting up an Nginx proxy. Once you've configured your sandbox proxy, you can download two Nginx config files as a zip file.
 You'll skip 3scale's instructions for deploying on AWS. We'll be deploying on Heroku
@@ -29,7 +29,7 @@ Modify the nginx.conf file that 3Scale gave you to look like the nginx.conf file
 
 Paste the contents of the generated .lua file into nginx_3scale_access.lua file
 
-Create your heroku app, using the heroku-openresty buildpack:
+Create your heroku app, using the heroku-buildpack-lua buildpack:
 
     $ heroku apps:create --buildpack http://github.com/leafo/heroku-buildpack-lua.git heroku-app-name
 
@@ -38,7 +38,7 @@ Commit your changes to git
     $ git add .
     $ git commit -m "Configuring the proxy with generated files from 3Scale"
 
-Create the 3SCALE_PROVIDER_KEY config variable using your secret 3Scale
+Create the 3SCALE\_PROVIDER\_KEY config variable using your secret 3Scale
 provider key. It's in the .conf file that 3Scale generates for you
 
     $ heroku config:set 3SCALE_PROVIDER_KEY=1239832745abcde
@@ -71,9 +71,16 @@ but it's only for sandbox/testing use. Nginx is very efficient, so you won't nee
 to deploy another Heroku dyno unless you're pushing insane API traffic.
 That keeps this within the free usage tier on Heroku.
 
+3Scale's AWS instructions are great, but it's even more appealing to me to run Nginx on Heroku because 
++ It's free
++ More stuff is managed for me
++ It's on AWS under the hood anyway
++ My Nginx config files are guaranteed to be revisioned
+
+
 Credits
 -------
-[3Scale](3Scale.com) did the cool part by making their API proxy an Nginx config rather than a proprietary binary. Nice!
+[3Scale](3Scale.com) did the cool part by [making their API proxy simply an open Nginx config](http://www.3scale.net/api-management/api-proxy-for-api-traffic-management-by-3scale/). Nice!
 
 The [OpenResty buildpack](https://github.com/leafo/heroku-openresty) did the hard Heroku work! Thanks!
 
