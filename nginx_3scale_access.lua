@@ -1,3 +1,3 @@
 -- This file is generated for you by 3Scale by following the steps here:
 -- https://support.3scale.net/howtos/api-configuration/nginx-proxy
--- Just paste the contents of their generated .lua file in here
+-- Overwrite the contents of this file with their generated .lua file
